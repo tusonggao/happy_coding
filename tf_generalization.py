@@ -26,13 +26,15 @@ def one_hot(vec, vals=2):
     out[range(n), vec] = 1
     return out
 
+np.random.seed(42)
+
 TRAINING_NUM = 10000
 TEST_NUM = 2000
 DIMENSION_NUM = 5
 
 learning_rate = 0.5
 
-X_train = np.random.randn(TRAINING_NUM, DIMENSION_NUM) #[0, 1)
+X_train = np.random.randn(TRAINING_NUM, DIMENSION_NUM)    #[0, 1)
 X_test = 1 + np.random.randn(TEST_NUM, DIMENSION_NUM)     #[1, 2)
 
 y_train = np.sin(np.sum(np.power(X_train, 3), axis=1))
@@ -49,7 +51,7 @@ print('y_test_onehoted is', y_test_onehoted)
 
 print('y_train.shape is ', y_train.shape)
 print('y_test.shape is ', y_test.shape)
-print(y_test)
+#print(y_test)
 
 x_tf = tf.placeholder(tf.float32, shape=[None, DIMENSION_NUM])
 y_true = tf.placeholder(tf.float32, shape=[None, 2])
@@ -59,7 +61,8 @@ y_l_1 = tf.nn.sigmoid(full_layer(x_tf, 12))
 y_l_2 = tf.nn.relu(full_layer(y_l_1, 25))
 # y1 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(w1, tf.transpose(inputs)), b1)), keep_prob=0.5)
 y_l_3 = tf.nn.relu(full_layer(y_l_2, 15))
-y_l_4 = tf.nn.sigmoid(full_layer(y_l_3, 2))
+# y_l_4 = tf.nn.sigmoid(full_layer(y_l_3, 2))
+y_l_4 = full_layer(y_l_3, 2)
 y_l_5 = tf.nn.softmax(y_l_4)
 
 print('y_true shape ', y_true.get_shape(),
