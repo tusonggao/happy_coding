@@ -6,10 +6,10 @@ def nonlin(x, deriv=False):
     return 1/(1+np.exp(-x))
 
 #input data
-X = np.array[[0, 0, 1],
-             [0, 1, 1],
-             [1, 0, 1],
-             [1, 1, 1]]
+X = np.array([[0, 0, 1],
+              [0, 1, 1],
+              [1, 0, 1],
+              [1, 1, 1]])
 
 #output data
 y = np.array([[0],
@@ -24,12 +24,13 @@ syn0 = 2*np.random.random((3, 4)) - 1
 syn1 = 2*np.random.random((4, 1)) - 1
 
 #training step
-for j in range(6000):
+for j in range(60000):
     l0 = X
     l1 = nonlin(np.dot(l0, syn0))
     l2 = nonlin(np.dot(l1, syn1))
 
     l2_error = y - l2
+
     if (j%10000)==0:
         print('Error', np.mean(np.abs(l2_error)))
 
