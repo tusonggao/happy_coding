@@ -22,6 +22,7 @@ intermediate_dim = 256
 epochs = 50
 epsilon_std = 1.0
 
+print('get here 111')
 
 x = Input(shape=(original_dim,))
 h = Dense(intermediate_dim, activation='relu')(x)
@@ -47,6 +48,8 @@ x_decoded_mean = decoder_mean(h_decoded)
 # instantiate VAE model
 vae = Model(x, x_decoded_mean)
 
+print('get here 222')
+
 # Compute VAE loss
 xent_loss = original_dim * metrics.binary_crossentropy(x, x_decoded_mean)
 kl_loss = - 0.5 * K.sum(1 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
@@ -56,6 +59,8 @@ vae.add_loss(vae_loss)
 vae.compile(optimizer='rmsprop')
 vae.summary()
 
+
+print('get here 333')
 
 # train the VAE on MNIST digits
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -80,6 +85,8 @@ plt.figure(figsize=(6, 6))
 plt.scatter(x_test_encoded[:, 0], x_test_encoded[:, 1], c=y_test)
 plt.colorbar()
 plt.show()
+
+print('get here 444')
 
 # build a digit generator that can sample from the learned distribution
 decoder_input = Input(shape=(latent_dim,))
@@ -107,3 +114,5 @@ for i, yi in enumerate(grid_x):
 plt.figure(figsize=(10, 10))
 plt.imshow(figure, cmap='Greys_r')
 plt.show()
+
+print('get here 555')

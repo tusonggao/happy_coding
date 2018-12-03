@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 def nonlin(x, deriv=False):
     if deriv:
@@ -6,22 +7,25 @@ def nonlin(x, deriv=False):
     return 1/(1+np.exp(-x))
 
 #input data
-X = np.array([[0, 0, 1],
-              [0, 1, 1],
-              [1, 0, 1],
-              [1, 1, 1]])
+X = np.array([[0, 0, 1, 2],
+              [0, 1, 1, 4],
+              [1, 0, 1, 9],
+              [1, 1, 1, -4]])
 
-#output data
-y = np.array([[0],
-              [1],
-              [1],
-              [0]])
+# output data
+# y = np.array([[0],
+#               [1],
+#               [1],
+#               [0]])
+
+y = np.sin(np.sum(np.power(X, 3), axis=1)).reshape((4, 1))
+print('y is', y, y.shape)
 
 np.random.seed(1)
 
 #synapses
-syn0 = 2*np.random.random((3, 4)) - 1
-syn1 = 2*np.random.random((4, 1)) - 1
+syn0 = 2*np.random.random((4, 13)) - 1
+syn1 = 2*np.random.random((13, 1)) - 1
 
 #training step
 for j in range(60000):
@@ -42,3 +46,10 @@ for j in range(60000):
     syn0 += l0.T.dot(l1_delta)
 
 print('Output', l2)
+
+start_t = time.time()
+for i in range(10000):
+    outcomes = [3, 5, 7, 9, 11, 99, 88, 128, 7]
+    outcomes.remove(9)
+end_t = time.time()
+print('cost time:', end_t-start_t)

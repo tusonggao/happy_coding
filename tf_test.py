@@ -1,5 +1,7 @@
 import tensorflow  
-   
+
+
+
 # Preparing training data (inputs-outputs)  
 training_inputs = tensorflow.placeholder(shape=[None, 3], dtype=tensorflow.float32)
 #Desired outputs for each input
@@ -50,3 +52,4 @@ print("Expected Scores : ", sess.run(fetches=predictions, feed_dict={training_in
   
 # Closing the TensorFlow Session to free resources  
 sess.close()
+
