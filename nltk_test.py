@@ -13,7 +13,8 @@ start_t = time.time()
 # nltk.download('averaged_perceptron_tagger')
 # nltk.download('maxent_ne_chunker')
 # nltk.download('words')
-nltk.download('treebank')
+# nltk.download('treebank')
+nltk.download()
 
 print('download cost time', time.time()-start_t)
 
@@ -32,5 +33,5 @@ entities = nltk.chunk.ne_chunk(tagged)
 print(entities)
 
 from nltk.corpus import treebank
-t = treebank.parsed_sents('wsj_0001.mrg')[0]
+t = treebank.parsed_sents('wsj_0003.mrg')[0]
 t.draw()
