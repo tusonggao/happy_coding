@@ -37,3 +37,11 @@ print(entities)
 # t.draw()
 
 print(nltk.corpus.gutenberg.fileids())
+
+emma = nltk.corpus.gutenberg.words('austen-emma.txt')
+
+# print('emma is ', emma[100: 300])
+# print('len(emma) is ', len(emma))
+
+emma = nltk.Text(nltk.corpus.gutenberg.words('austen-emma.txt'))
+print(emma.concordance("surprize"))
